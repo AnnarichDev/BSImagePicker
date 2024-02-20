@@ -165,8 +165,6 @@
 		550A314721D5298400AAF718 = {
 			isa = PBXGroup;
 			children = (
-				94A9B61A2B83BC08005E2CAE /* BSImagePickerInstance.swift */,
-				940BDB412B8310EC00AE9840 /* Localizable.strings */,
 				55BCF8EA21D52D4700386752 /* Meta */,
 				550A315321D5298400AAF718 /* Sources */,
 				5569D00321D52A6D00D03631 /* Tests */,
@@ -192,6 +190,8 @@
 				559DB81D21E78E5500CD58B4 /* Controller */,
 				559DB81C21E78E4700CD58B4 /* Scene */,
 				550A315521D5298400AAF718 /* Info.plist */,
+				94A9B61A2B83BC08005E2CAE /* BSImagePickerInstance.swift */,
+				940BDB412B8310EC00AE9840 /* Localizable.strings */,
 				550A315421D5298400AAF718 /* BSImagePicker.h */,
 				94DA6871247BDE6400CD5251 /* Extension */,
 			);
