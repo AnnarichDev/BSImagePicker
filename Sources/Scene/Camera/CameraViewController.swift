@@ -50,13 +50,11 @@ class CameraViewController: UIViewController {
                 if granted {
                     self?.captureSessionQueue.resume()
                 } else {
-                    // TODO: User didn't grant access. Show something?
+                    self?.presentAlert()
                 }
             })
 
-        default:
-            // TODO: User has denied access...show some sort of dialog..?
-            break
+        default: presentAlert()
         }
     }
 
@@ -64,5 +62,37 @@ class CameraViewController: UIViewController {
         captureSessionQueue.async {
 
         }
+    }
+    
+    private func presentAlert() {
+        let title = "alert_camera_title".localized()
+        let message = "alert_camera_message".localized()
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        let notNowAction = UIAlertAction(title: "alert_not_now".localized(),
+                                         style: .cancel,
+                                         handler: nil)
+        alert.addAction(notNowAction)
+        
+        let openSettingsAction = UIAlertAction(title: "alert_open_settings".localized(),
+                                               style: .default) { [unowned self] (_) in
+            // Open app privacy settings
+            gotoAppPrivacySettings()
+        }
+        alert.addAction(openSettingsAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func gotoAppPrivacySettings() {
+        guard let url = URL(string: UIApplication.openSettingsURLString),
+            UIApplication.shared.canOpenURL(url) else {
+                assertionFailure("Not able to open App privacy settings")
+                return
+        }
+
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }

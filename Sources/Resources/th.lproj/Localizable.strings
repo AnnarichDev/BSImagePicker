@@ -20,3 +20,7 @@
 "bottom_sheet_message" = "เลือกรูปภาพเพิ่มเติม หรือไปที่เมนูตั้งค่า เพื่ออนุญาตให้เข้าถึงรูปภาพทั้งหมด";
 "bottom_sheet_select_more_photos" = "เลือกรูปภาพเพิ่มเติม";
 "bottom_sheet_allow_all_photos" = "เปิดเมนูตั้งค่า";
+
+// Alert Camera
+"alert_camera_title" = "อนุญาตให้เข้าถึงกล้องถ่ายรูปของคุณ";
+"alert_camera_message" = "กรุณาเปลี่ยนการตั้งค่าของคุณให้อนุญาตเข้าถึงกล้องถ่ายรูป";

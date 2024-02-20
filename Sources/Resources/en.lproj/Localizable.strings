@@ -20,3 +20,7 @@
 "bottom_sheet_message" = "Select more photos or go to Settings to allow access to all photos.";
 "bottom_sheet_select_more_photos" = "Select more photos";
 "bottom_sheet_allow_all_photos" = "Allow access to all photos";
+
+// Alert Camera
+"alert_camera_title" = "Allow access to your Camera";
+"alert_camera_message" = "Please change your settings to allow access your Camera.";
