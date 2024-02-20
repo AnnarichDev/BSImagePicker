@@ -189,9 +189,8 @@
 				559DB81E21E78E6100CD58B4 /* View */,
 				559DB81D21E78E5500CD58B4 /* Controller */,
 				559DB81C21E78E4700CD58B4 /* Scene */,
+				94A9B61E2B849DDC005E2CAE /* Resources */,
 				550A315521D5298400AAF718 /* Info.plist */,
-				94A9B61A2B83BC08005E2CAE /* BSImagePickerInstance.swift */,
-				940BDB412B8310EC00AE9840 /* Localizable.strings */,
 				550A315421D5298400AAF718 /* BSImagePicker.h */,
 				94DA6871247BDE6400CD5251 /* Extension */,
 			);
@@ -342,6 +341,15 @@
 				55C5B803222C15D5003CF3F1 /* DropdownAnimator.swift */,
 			);
 			path = Dropdown;
+			sourceTree = "<group>";
+		};
+		94A9B61E2B849DDC005E2CAE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				94A9B61A2B83BC08005E2CAE /* BSImagePickerInstance.swift */,
+				940BDB412B8310EC00AE9840 /* Localizable.strings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		94DA6871247BDE6400CD5251 /* Extension */ = {
