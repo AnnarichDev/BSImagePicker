@@ -23,7 +23,7 @@
 import UIKit
 import Photos
 
-protocol AssetsViewControllerDelegate: class {
+protocol AssetsViewControllerDelegate: AnyObject {
     func assetsViewController(_ assetsViewController: AssetsViewController, didSelectAsset asset: PHAsset)
     func assetsViewController(_ assetsViewController: AssetsViewController, didDeselectAsset asset: PHAsset)
     func assetsViewController(_ assetsViewController: AssetsViewController, didLongPressCell cell: AssetCollectionViewCell, displayingAsset asset: PHAsset)
@@ -75,8 +75,12 @@ class AssetsViewController: UIViewController {
         collectionView.alwaysBounceVertical = true
         collectionView.backgroundColor = settings.theme.backgroundColor
         collectionView.delegate = self
+        dataSource.didManaged = { [weak self] in
+            self?.didPrassedMange()
+        }
         collectionView.dataSource = dataSource
         collectionView.prefetchDataSource = dataSource
+        
         AssetsCollectionViewDataSource.registerCellIdentifiersForCollectionView(collectionView)
 
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(AssetsViewController.collectionViewLongPressed(_:)))
@@ -147,6 +151,49 @@ class AssetsViewController: UIViewController {
 
         delegate?.assetsViewController(self, didLongPressCell: cell, displayingAsset: asset)
     }
+    
+    @objc func didPrassedMange() {
+        if #available(iOS 14, *) {
+            let actionSheet = UIAlertController(
+                title: "",
+                message: "message_bottom_sheet".localized(),
+                preferredStyle: .actionSheet)
+            
+            let selectPhotosAction = UIAlertAction(
+                title: "select_more_photos".localized(),
+                style: .default) { [unowned self] (_) in
+                // Show limited library picker
+                PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
+            }
+            actionSheet.addAction(selectPhotosAction)
+            
+            let allowFullAccessAction = UIAlertAction(
+                title: "allow_all_photos".localized(),
+                style: .default) { [unowned self] (_) in
+                // Open app privacy settings
+                gotoAppPrivacySettings()
+            }
+            actionSheet.addAction(allowFullAccessAction)
+            
+            let cancelAction = UIAlertAction(
+                title: "cancel".localized(),
+                style: .cancel, handler: nil)
+            actionSheet.addAction(cancelAction)
+            
+            present(actionSheet, animated: true, completion: nil)
+        } else {
+            gotoAppPrivacySettings()
+        }
+    }
+    
+    private func gotoAppPrivacySettings() {
+        guard let url = URL(string: UIApplication.openSettingsURLString),
+            UIApplication.shared.canOpenURL(url) else {
+                assertionFailure("Not able to open App privacy settings")
+                return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
 
     private func updateCollectionViewLayout(for traitCollection: UITraitCollection) {
         guard let collectionViewFlowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else  { return }
@@ -159,6 +206,7 @@ class AssetsViewController: UIViewController {
         collectionViewFlowLayout.minimumLineSpacing = itemSpacing
         collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
         collectionViewFlowLayout.itemSize = itemSize
+        collectionViewFlowLayout.headerReferenceSize = CGSize(width: collectionView.frame.size.width, height: 50)
 
         dataSource.imageSize = itemSize.resize(by: UIScreen.main.scale)
     }

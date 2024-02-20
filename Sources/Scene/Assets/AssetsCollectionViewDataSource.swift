@@ -26,6 +26,7 @@ import Photos
 class AssetsCollectionViewDataSource : NSObject, UICollectionViewDataSource {
     private static let assetCellIdentifier = "AssetCell"
     private static let videoCellIdentifier = "VideoCell"
+    private static let headerCellIdentifier = "HeaderCell"
     
     var settings: Settings!
     var fetchResult: PHFetchResult<PHAsset> {
@@ -39,11 +40,12 @@ class AssetsCollectionViewDataSource : NSObject, UICollectionViewDataSource {
         }
     }
 
+    var didManaged: (() -> Void)?
     private let imageManager = PHCachingImageManager()
     private let durationFormatter = DateComponentsFormatter()
     private let store: AssetStore
     private let contentMode: PHImageContentMode = .aspectFill
-    
+
     init(fetchResult: PHFetchResult<PHAsset>, store: AssetStore) {
         self.fetchResult = fetchResult
         self.store = store
@@ -88,7 +90,65 @@ class AssetsCollectionViewDataSource : NSObject, UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+
+        if kind == UICollectionView.elementKindSectionHeader {
+            let headerCell = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionHeader,
+                withReuseIdentifier: AssetsCollectionViewDataSource.headerCellIdentifier, for: indexPath
+            )
+            
+            headerCell.backgroundColor = .clear
+            headerCell.clearAllSubviews()
+            let mangeButton = UIButton()
+            mangeButton.backgroundColor = .clear
+            mangeButton.setTitleColor(.blue, for: .normal)
+            mangeButton.setTitle("button_manage".localized(), for: .normal)
+            mangeButton.layer.masksToBounds = true
+            mangeButton.addTarget(self, action: #selector(didPrassedMange), for: .touchUpInside)
+            mangeButton.translatesAutoresizingMaskIntoConstraints = false
+            
+            let messageLabel = UILabel()
+            messageLabel.textColor = .black
+            messageLabel.translatesAutoresizingMaskIntoConstraints = false
+            messageLabel.text = "title_limited_media".localized()
+            headerCell.addSubview(mangeButton)
+            headerCell.addSubview(messageLabel)
+            
+            let views = ["mangeButton": mangeButton, "label": messageLabel]
+            headerCell.addConstraints(
+                NSLayoutConstraint.constraints(
+                    withVisualFormat: "H:|-20-[label]-(<=1)-[mangeButton]-20-|", metrics: nil, views: views
+                )
+            )
+            headerCell.addConstraints(
+                NSLayoutConstraint.constraints(
+                    withVisualFormat: "V:|-10-[mangeButton(30)]-10-|", metrics: nil, views: views
+                )
+            )
+            headerCell.addConstraints(
+                NSLayoutConstraint.constraints(
+                    withVisualFormat: "V:|-10-[label(30)]-10-|", metrics: nil, views: views
+                )
+            )
+
+            return headerCell
+        } else {
+            return UICollectionReusableView()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 100.0)
+    }
+    
     static func registerCellIdentifiersForCollectionView(_ collectionView: UICollectionView?) {
+        collectionView?.register(
+            UICollectionReusableView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: headerCellIdentifier
+        )
+        
         collectionView?.register(AssetCollectionViewCell.self, forCellWithReuseIdentifier: assetCellIdentifier)
         collectionView?.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: videoCellIdentifier)
     }
@@ -105,6 +165,10 @@ class AssetsCollectionViewDataSource : NSObject, UICollectionViewDataSource {
             cell.imageView.image = image
         })
     }
+    
+    @objc private func didPrassedMange() {
+        didManaged?()
+    }
 }
 
 extension AssetsCollectionViewDataSource: UICollectionViewDataSourcePrefetching {
@@ -113,6 +177,5 @@ extension AssetsCollectionViewDataSource: UICollectionViewDataSourcePrefetching 
         imageManager.startCachingImages(for: assets, targetSize: imageSize, contentMode: contentMode, options: nil)
     }
 
-    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
-    }
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {}
 }

@@ -54,15 +54,72 @@ import Photos
     }
 
     private func authorize(_ authorized: @escaping () -> Void) {
-        PHPhotoLibrary.requestAuthorization { (status) in
-            switch status {
-            case .authorized:
-                DispatchQueue.main.async(execute: authorized)
-            default:
-                break
+        if #available(iOS 14, *) {
+            let accessLevel: PHAccessLevel = .readWrite
+            PHPhotoLibrary.requestAuthorization(for: accessLevel) { [weak self] (status) in
+                guard let self else { return }
+                switch status {
+                case .authorized:
+                    DispatchQueue.main.async(execute: authorized)
+                case .denied, .notDetermined, .restricted:
+                    DispatchQueue.main.async {
+                        self.presentAlert()
+                    }
+                case .limited:
+                    DispatchQueue.main.async(execute: authorized)
+                default:
+                    break
+                }
+            }
+        } else {
+            PHPhotoLibrary.requestAuthorization { [weak self] (status) in
+                guard let self else { return }
+                switch status {
+                case .authorized:
+                    DispatchQueue.main.async(execute: authorized)
+                case .denied, .notDetermined, .restricted:
+                    self.presentAlert()
+                case .limited:
+                    DispatchQueue.main.async(execute: authorized)
+                default:
+                    break
+                }
             }
         }
     }
+    
+    private func presentAlert() {
+        let title = "allow_all_photos".localized()
+        let message = "message_alert".localized()
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        let notNowAction = UIAlertAction(title: "not_now".localized(),
+                                         style: .cancel,
+                                         handler: nil)
+        alert.addAction(notNowAction)
+        
+        let openSettingsAction = UIAlertAction(title: "open_settings".localized(),
+                                               style: .default) { [unowned self] (_) in
+            // Open app privacy settings
+            gotoAppPrivacySettings()
+        }
+        alert.addAction(openSettingsAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func gotoAppPrivacySettings() {
+        guard let url = URL(string: UIApplication.openSettingsURLString),
+            UIApplication.shared.canOpenURL(url) else {
+                assertionFailure("Not able to open App privacy settings")
+                return
+        }
+
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+
 }
 
 extension ImagePickerController {

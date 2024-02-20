@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  BSImagePicker
+
+  Created by NB1003917 on 19/2/2567 BE.
+  Copyright © 2567 BE Joakim Gyllström. All rights reserved.
+*/
+
+"title_limited_media" = "You have given limited access to media";
+"button_manage" = "Manage";
+
+// Alert
+"title_alert" = "Photo";
+"message_alert" = "Please change your settings to allow access your photos.";
+"not_now" = "Not Now";
+"open_settings" = "Open Settings";
+
+"message_bottom_sheet" = "Select more photos or go to Settings to allow access to all photos.";
+"select_more_photos" = "Select more photos";
+"allow_all_photos" = "Allow access to all photos";
+"cancel" = "Cancel";

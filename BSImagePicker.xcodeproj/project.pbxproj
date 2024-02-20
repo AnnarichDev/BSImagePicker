@@ -49,6 +49,10 @@
 		55CDB45F22347D640050D572 /* ZoomInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CDB45E22347D640050D572 /* ZoomInteractionController.swift */; };
 		55F67B77222EEB2500805134 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F67B76222EEB2500805134 /* VideoCollectionViewCell.swift */; };
 		55F67B7B222F088500805134 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F67B7A222F088500805134 /* GradientView.swift */; };
+		940BDB3F2B8310EC00AE9840 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 940BDB412B8310EC00AE9840 /* Localizable.strings */; };
+		940BDB442B8312AE00AE9840 /* String+BSImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940BDB432B8312AE00AE9840 /* String+BSImagePicker.swift */; };
+		940BDB462B83323600AE9840 /* UIView+BSImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940BDB452B83323600AE9840 /* UIView+BSImagePicker.swift */; };
+		94A9B61B2B83BC08005E2CAE /* BSImagePickerInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9B61A2B83BC08005E2CAE /* BSImagePickerInstance.swift */; };
 		94DA6870247BDE5900CD5251 /* UIColor+BSImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DA686F247BDE5900CD5251 /* UIColor+BSImagePicker.swift */; };
 		C2DC13CA23F75BDB0035FD13 /* NumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DC13C923F75BDA0035FD13 /* NumberView.swift */; };
 		C2DC13CC23F75BE40035FD13 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DC13CB23F75BE40035FD13 /* SelectionView.swift */; };
@@ -128,6 +132,11 @@
 		55DAB07F23145A8A00982A5B /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .travis.yml; sourceTree = "<group>"; };
 		55F67B76222EEB2500805134 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		55F67B7A222F088500805134 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		940BDB402B8310EC00AE9840 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		940BDB422B83110700AE9840 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
+		940BDB432B8312AE00AE9840 /* String+BSImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+BSImagePicker.swift"; sourceTree = "<group>"; };
+		940BDB452B83323600AE9840 /* UIView+BSImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+BSImagePicker.swift"; sourceTree = "<group>"; };
+		94A9B61A2B83BC08005E2CAE /* BSImagePickerInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSImagePickerInstance.swift; sourceTree = "<group>"; };
 		94DA686F247BDE5900CD5251 /* UIColor+BSImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+BSImagePicker.swift"; sourceTree = "<group>"; };
 		C2DC13C923F75BDA0035FD13 /* NumberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberView.swift; sourceTree = "<group>"; };
 		C2DC13CB23F75BE40035FD13 /* SelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
@@ -156,6 +165,8 @@
 		550A314721D5298400AAF718 = {
 			isa = PBXGroup;
 			children = (
+				94A9B61A2B83BC08005E2CAE /* BSImagePickerInstance.swift */,
+				940BDB412B8310EC00AE9840 /* Localizable.strings */,
 				55BCF8EA21D52D4700386752 /* Meta */,
 				550A315321D5298400AAF718 /* Sources */,
 				5569D00321D52A6D00D03631 /* Tests */,
@@ -337,6 +348,8 @@
 			isa = PBXGroup;
 			children = (
 				94DA686F247BDE5900CD5251 /* UIColor+BSImagePicker.swift */,
+				940BDB432B8312AE00AE9840 /* String+BSImagePicker.swift */,
+				940BDB452B83323600AE9840 /* UIView+BSImagePicker.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -419,6 +432,7 @@
 			knownRegions = (
 				en,
 				Base,
+				th,
 			);
 			mainGroup = 550A314721D5298400AAF718;
 			productRefGroup = 550A315221D5298400AAF718 /* Products */;
@@ -436,6 +450,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				940BDB3F2B8310EC00AE9840 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +477,7 @@
 				550CB425230FD01200543217 /* ImageView.swift in Sources */,
 				55BCF8D521D52C1000386752 /* AssetCollectionViewCell.swift in Sources */,
 				559DB81B21E6B43400CD58B4 /* ImagePickerController+ButtonActions.swift in Sources */,
+				94A9B61B2B83BC08005E2CAE /* BSImagePickerInstance.swift in Sources */,
 				559DB81121E6561300CD58B4 /* ImagePickerController+Closure.swift in Sources */,
 				55C5B802222BD529003CF3F1 /* DropdownPresentationController.swift in Sources */,
 				55BCF8E021D52C1000386752 /* ZoomAnimator.swift in Sources */,
@@ -472,6 +488,7 @@
 				5554729D21E5248400B90CA5 /* ImagePickerController.swift in Sources */,
 				55C5B800222BD445003CF3F1 /* DropdownTransitionDelegate.swift in Sources */,
 				55BCF8D321D52C1000386752 /* AssetsCollectionViewDataSource.swift in Sources */,
+				940BDB442B8312AE00AE9840 /* String+BSImagePicker.swift in Sources */,
 				550CB427230FD08200543217 /* ImageViewLayout.swift in Sources */,
 				55BCF8D621D52C1000386752 /* AlbumCell.swift in Sources */,
 				55BCF8D021D52C1000386752 /* AlbumsTableViewDataSource.swift in Sources */,
@@ -484,6 +501,7 @@
 				559DB81921E6AFF300CD58B4 /* ImagePickerController+Albums.swift in Sources */,
 				55BCF8D721D52C1000386752 /* CheckmarkView.swift in Sources */,
 				555472AE21E538B000B90CA5 /* AssetsViewController.swift in Sources */,
+				940BDB462B83323600AE9840 /* UIView+BSImagePicker.swift in Sources */,
 				5543942D232A4EB500DB51B7 /* LivePreviewViewController.swift in Sources */,
 				C2DC13CA23F75BDB0035FD13 /* NumberView.swift in Sources */,
 				55BCF8DC21D52C1000386752 /* PreviewViewController.swift in Sources */,
@@ -517,11 +535,24 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		940BDB412B8310EC00AE9840 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				940BDB402B8310EC00AE9840 /* en */,
+				940BDB422B83110700AE9840 /* th */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		550A315721D5298400AAF718 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -586,6 +617,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

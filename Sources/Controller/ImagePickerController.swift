@@ -140,6 +140,7 @@ import Photos
         if let firstAlbum = albums.first {
             select(album: firstAlbum)
         }
+
     }
 
     public func deselect(asset: PHAsset) {
