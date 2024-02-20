@@ -108,9 +108,8 @@ import Photos
         // Setup buttons
         let firstViewController = viewControllers.first
         albumButton.setTitleColor(albumButton.tintColor, for: .normal)
-        albumButton.titleLabel?.font = .systemFont(ofSize: 16)
+        albumButton.titleLabel?.font = BSImagePickerFont.text
         albumButton.titleLabel?.adjustsFontSizeToFitWidth = true
-
         let arrowView = ArrowView(frame: CGRect(x: 0, y: 0, width: 8, height: 8))
         arrowView.backgroundColor = .clear
         arrowView.strokeColor = albumButton.tintColor
@@ -120,13 +119,20 @@ import Photos
         albumButton.semanticContentAttribute = .forceRightToLeft // To set image to the right without having to calculate insets/constraints.
         albumButton.addTarget(self, action: #selector(ImagePickerController.albumsButtonPressed(_:)), for: .touchUpInside)
         firstViewController?.navigationItem.titleView = albumButton
-
+        let doneAttrs = [NSAttributedString.Key.font: BSImagePickerFont.textBold]
         doneButton.target = self
         doneButton.action = #selector(doneButtonPressed(_:))
+        doneButton.setTitleTextAttributes(doneAttrs, for: .normal)
+        doneButton.setTitleTextAttributes(doneAttrs, for: .disabled)
+
         firstViewController?.navigationItem.rightBarButtonItem = doneButton
 
         cancelButton.target = self
+        let cancelAttrs = [NSAttributedString.Key.font: BSImagePickerFont.text]
         cancelButton.action = #selector(cancelButtonPressed(_:))
+        cancelButton.setTitleTextAttributes(cancelAttrs, for: .normal)
+        cancelButton.setTitleTextAttributes(cancelAttrs, for: .disabled)
+
         firstViewController?.navigationItem.leftBarButtonItem = cancelButton
         
         updatedDoneButton()
@@ -151,7 +157,6 @@ import Photos
     
     func updatedDoneButton() {
         doneButton.title = assetStore.count > 0 ? doneButtonTitle + " (\(assetStore.count))" : doneButtonTitle
-      
         doneButton.isEnabled = assetStore.count >= settings.selection.min
     }
 

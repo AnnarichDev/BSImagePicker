@@ -100,10 +100,14 @@ class AssetsCollectionViewDataSource : NSObject, UICollectionViewDataSource {
             
             headerCell.backgroundColor = .clear
             headerCell.clearAllSubviews()
+            
+            guard BSImagePickerInstance.shared.isAccessLimitedPhoto else { return headerCell }
+            
             let mangeButton = UIButton()
             mangeButton.backgroundColor = .clear
-            mangeButton.setTitleColor(.blue, for: .normal)
-            mangeButton.setTitle("button_manage".localized(), for: .normal)
+            mangeButton.setTitleColor(.systemBlue, for: .normal)
+            mangeButton.titleLabel?.font = BSImagePickerFont.textBold
+                        mangeButton.setTitle("button_manage".localized(), for: .normal)
             mangeButton.layer.masksToBounds = true
             mangeButton.addTarget(self, action: #selector(didPrassedMange), for: .touchUpInside)
             mangeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -111,16 +115,24 @@ class AssetsCollectionViewDataSource : NSObject, UICollectionViewDataSource {
             let messageLabel = UILabel()
             messageLabel.textColor = .black
             messageLabel.translatesAutoresizingMaskIntoConstraints = false
-            messageLabel.text = "title_limited_media".localized()
+            messageLabel.text = "limited_media".localized()
+            messageLabel.font = BSImagePickerFont.text
             headerCell.addSubview(mangeButton)
             headerCell.addSubview(messageLabel)
             
             let views = ["mangeButton": mangeButton, "label": messageLabel]
             headerCell.addConstraints(
                 NSLayoutConstraint.constraints(
-                    withVisualFormat: "H:|-20-[label]-(<=1)-[mangeButton]-20-|", metrics: nil, views: views
+                    withVisualFormat: "H:|-10-[label]", metrics: nil, views: views
                 )
             )
+            
+            headerCell.addConstraints(
+                NSLayoutConstraint.constraints(
+                    withVisualFormat: "H:[mangeButton]-10-|", metrics: nil, views: views
+                )
+            )
+
             headerCell.addConstraints(
                 NSLayoutConstraint.constraints(
                     withVisualFormat: "V:|-10-[mangeButton(30)]-10-|", metrics: nil, views: views
@@ -138,17 +150,12 @@ class AssetsCollectionViewDataSource : NSObject, UICollectionViewDataSource {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 100.0)
-    }
-    
     static func registerCellIdentifiersForCollectionView(_ collectionView: UICollectionView?) {
         collectionView?.register(
             UICollectionReusableView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: headerCellIdentifier
         )
-        
         collectionView?.register(AssetCollectionViewCell.self, forCellWithReuseIdentifier: assetCellIdentifier)
         collectionView?.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: videoCellIdentifier)
     }

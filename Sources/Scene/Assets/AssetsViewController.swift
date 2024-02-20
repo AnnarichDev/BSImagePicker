@@ -156,11 +156,11 @@ class AssetsViewController: UIViewController {
         if #available(iOS 14, *) {
             let actionSheet = UIAlertController(
                 title: "",
-                message: "message_bottom_sheet".localized(),
+                message: "bottom_sheet_message".localized(),
                 preferredStyle: .actionSheet)
             
             let selectPhotosAction = UIAlertAction(
-                title: "select_more_photos".localized(),
+                title: "bottom_sheet_select_more_photos".localized(),
                 style: .default) { [unowned self] (_) in
                 // Show limited library picker
                 PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
@@ -168,7 +168,7 @@ class AssetsViewController: UIViewController {
             actionSheet.addAction(selectPhotosAction)
             
             let allowFullAccessAction = UIAlertAction(
-                title: "allow_all_photos".localized(),
+                title: "bottom_sheet_allow_all_photos".localized(),
                 style: .default) { [unowned self] (_) in
                 // Open app privacy settings
                 gotoAppPrivacySettings()
@@ -206,7 +206,8 @@ class AssetsViewController: UIViewController {
         collectionViewFlowLayout.minimumLineSpacing = itemSpacing
         collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
         collectionViewFlowLayout.itemSize = itemSize
-        collectionViewFlowLayout.headerReferenceSize = CGSize(width: collectionView.frame.size.width, height: 50)
+        let height = BSImagePickerInstance.shared.isAccessLimitedPhoto ? 50.0 : 0.0
+        collectionViewFlowLayout.headerReferenceSize = CGSize(width: collectionView.frame.size.width, height: height)
 
         dataSource.imageSize = itemSize.resize(by: UIScreen.main.scale)
     }

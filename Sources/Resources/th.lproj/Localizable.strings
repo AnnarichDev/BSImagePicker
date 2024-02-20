@@ -6,16 +6,17 @@
   Copyright © 2567 BE Joakim Gyllström. All rights reserved.
 */
 
-"title_limited_media" = "เลือกรูปภาพเพิ่มเติม หรือไปท่ีเมนูตั้งค่า เพื่ออนุญาตให้เข้าถึงรูปภาพทั้งหมด";
+"limited_media" = "คุณอนุญาตให้เข้าถึงสื่อแบบจำกัด";
 "button_manage" = "จัดการ";
+"cancel" = "ยกเลิก";
 
 // Alert
-"title_alert" = "อนุญาตให้เข้าถึงรูปภาพของคุณ";
-"message_alert" = "กรุณาเปลี่ยนการตั้งค่าของคุณให้อนุญาตเข้าถึงรูปภาพ";
-"not_now" = "ไม่ใช่ตอนนี้";
-"open_settings" = "เปิดเมนูตั้งค่า";
+"alert_title" = "อนุญาตให้เข้าถึงรูปภาพของคุณ";
+"alert_message" = "กรุณาเปลี่ยนการตั้งค่าของคุณให้อนุญาตเข้าถึงรูปภาพ";
+"alert_not_now" = "ไม่ใช่ตอนนี้";
+"alert_open_settings" = "เปิดเมนูตั้งค่า";
 
-"message_bottom_sheet" = "คุณอนุญาตให้เข้าถึงสื่อแบบจำกัด";
-"select_more_photos" = "เลือกรูปภาพเพิ่มเติม";
-"allow_all_photos" = "อนุญาตให้เข้าถึงรูปภาพทั้งหมด";
-"cancel" = "ยกเลิก";
+// Bottom sheet
+"bottom_sheet_message" = "เลือกรูปภาพเพิ่มเติม หรือไปที่เมนูตั้งค่า เพื่ออนุญาตให้เข้าถึงรูปภาพทั้งหมด";
+"bottom_sheet_select_more_photos" = "เลือกรูปภาพเพิ่มเติม";
+"bottom_sheet_allow_all_photos" = "เปิดเมนูตั้งค่า";

@@ -18,5 +18,10 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>GraphikTH-Regular.ttf</string>
+		<string>GraphikTH-SemiBold.ttf</string>
+	</array>
 </dict>
 </plist>

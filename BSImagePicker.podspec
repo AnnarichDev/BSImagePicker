@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.swift_version = '5.1'
 
   s.source_files = 'Sources/**/*.swift'
-  s.resources    = 'Sources/Resources/*.{lproj,Strings}'
+  s.resources    = ['Sources/Resources/*.{lproj,Strings}', 'Sources/Resources/Fonts/*.{ttf}']
 
   s.frameworks = 'UIKit', 'Photos'
 end

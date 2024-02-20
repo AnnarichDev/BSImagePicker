@@ -39,11 +39,18 @@ public class BSImagePickerInstance {
     public static let shared = BSImagePickerInstance()
 
     private(set) var language: Language = .en
+    private(set) var isAccessLimitedPhoto = false
 
-    public init() {}
+    public init() {
+        UIFont.loadFonts()
+    }
     
     public func setLanguage(_ lang: Language) {
         language = lang
+    }
+    
+    public func setAccessPhoto(_ access: Bool) {
+        isAccessLimitedPhoto = access
     }
 }
 

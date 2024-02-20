@@ -58,6 +58,7 @@ import Photos
             let accessLevel: PHAccessLevel = .readWrite
             PHPhotoLibrary.requestAuthorization(for: accessLevel) { [weak self] (status) in
                 guard let self else { return }
+                BSImagePickerInstance.shared.setAccessPhoto(status == .limited)
                 switch status {
                 case .authorized:
                     DispatchQueue.main.async(execute: authorized)
@@ -89,18 +90,18 @@ import Photos
     }
     
     private func presentAlert() {
-        let title = "allow_all_photos".localized()
-        let message = "message_alert".localized()
+        let title = "alert_title".localized()
+        let message = "alert_message".localized()
         let alert = UIAlertController(title: title,
                                       message: message,
                                       preferredStyle: .alert)
         
-        let notNowAction = UIAlertAction(title: "not_now".localized(),
+        let notNowAction = UIAlertAction(title: "alert_not_now".localized(),
                                          style: .cancel,
                                          handler: nil)
         alert.addAction(notNowAction)
         
-        let openSettingsAction = UIAlertAction(title: "open_settings".localized(),
+        let openSettingsAction = UIAlertAction(title: "alert_open_settings".localized(),
                                                style: .default) { [unowned self] (_) in
             // Open app privacy settings
             gotoAppPrivacySettings()
