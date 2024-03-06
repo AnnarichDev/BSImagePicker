@@ -11,12 +11,12 @@ Pod::Spec.new do |s|
   s.author           = { "Joakim Gyllström" => "joakim@backslashed.se" }
   s.source           = { :git => "https://github.com/mikaoj/BSImagePicker.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, '10.0'
+  s.platform     = :ios, '12.0'
   s.requires_arc = true
   s.swift_version = '5.1'
 
   s.source_files = 'Sources/**/*.swift'
-  s.resources    = 'Sources/Resources/*.{xcassets,storyboard,xib,xcdatamodeld,lproj,Strings}'
+  s.resources    = 'Sources/Resources/**/*'
 
   s.frameworks = 'UIKit', 'Photos'
 end
